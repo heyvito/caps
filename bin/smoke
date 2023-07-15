@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ruby <<-RUBY | less -R
+require "bundler/setup"
+require "caps"
+require "amazing_print"
+AmazingPrint.force_colors = true
+
+tokens = Caps::Tokenizer.parse(File.read("spec/fixtures/vito.io.css"))
+ast = Caps::Parser.new(tokens).parse_full_sheet
+ap(ast, index: false, ruby19_syntax: true, object_id: false, plain: false)
+RUBY
+
